@@ -1,0 +1,42 @@
+#include <FastLED.h>
+
+//Leds per box
+#define LEDSINBOX 18
+
+//number of boxes
+#define BOXES 8
+
+//led pin
+#define PIN 3
+
+#define NUM_LEDS (BOXES*LEDSINBOX)
+
+CRGBArray<NUM_LEDS> leds;
+
+void setup() {
+  FastLED.addLeds<WS2811, PIN>(leds, NUM_LEDS);
+}
+
+void loop() {
+  static uint8_t hue;
+  for (int i=0; i<LEDSINBOX; i++)
+  {
+    leds[i] = CHSV(hue++,255,255);
+    FastLED.delay(60);
+  }
+  for (int a=LEDSINBOX; a<(LEDSINBOX*2); a++)
+  {
+    leds[a] = CHSV(hue++,255,255);
+    FastLED.delay(60);
+  }
+  for (int b=(LEDSINBOX*2); b<(LEDSINBOX*3); b++)
+  {
+    leds[b] = CHSV(hue++,255,255);
+    FastLED.delay(60);
+  }
+  for (int c=(LEDSINBOX*3); c<(LEDSINBOX*4); c++)
+  {
+    leds[c] = CHSV(hue++,255,255);
+    FastLED.delay(60);
+  }
+}
